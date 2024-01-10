@@ -1,5 +1,5 @@
 <?php
 
- require __DIR___ . "/../public/index.php"; 
+ require __DIR__ . "/../public/index.php"; 
 
 ?>
