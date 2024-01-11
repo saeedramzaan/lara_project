@@ -26,6 +26,7 @@ class ModuleController extends Controller
     {
         try {
             DB::connection()->getPdo();
+            $data = DB::table('questions')->get();
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }
@@ -44,17 +45,19 @@ class ModuleController extends Controller
 // $password = $_ENV['PG_PASSWORD'];
 // $endpoint = $_ENV['PG_ENDPOINT'];
 
-// $host = "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com";
-// $port = "5432";
-// $db = "verceldb";
-// $user = "default";
-// $password = "PZceg7UF1MpN";
-// $endpoint = "ep-ancient-hat-81967113-pooler";
+$host = "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com";
+$port = "5432";
+$db = "verceldb";
+$user = "default";
+$password = "PZceg7UF1MpN";
+$endpoint = "ep-ancient-hat-81967113-pooler";
 
 // $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . "' sslmode=require";
 
-//  $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+ 
+  $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
 
+  echo $connection_string;
 
 // $dbconn = pg_connect($connection_string);
 
