@@ -26,7 +26,9 @@ class ModuleController extends Controller
     {
         try {
             DB::connection()->getPdo();
-           // $data = DB::table('questions')->get();
+            $data = DB::table('questions')->get();
+
+            return $data;
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }
