@@ -24,10 +24,15 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        $data = Que::get();
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            die("Could not connect to the database.  Please check your configuration. error:" . $e );
+        }
+    //     $data = Que::get();
 
-      //  return  response()->json($users);
-        return json_encode(array('data' => $data,'count' => 4));
+    //   //  return  response()->json($users);
+    //     return json_encode(array('data' => $data,'count' => 4));
     }
 
     /**
