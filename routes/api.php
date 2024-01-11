@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ModuleController;
 
  
-Route::get('/module', [ModuleController::class, 'index']);
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +17,7 @@ Route::get('/module', [ModuleController::class, 'index']);
 |
 */
 
-
+Route::get('/module', [ModuleController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
