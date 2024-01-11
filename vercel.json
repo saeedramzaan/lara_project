@@ -9,10 +9,15 @@
         "dest": "/api/index.php"
     }],
     "env": {
+        "PG_HOST": "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com",
+        "PG_PORT": "5432",
+        "PG_DB": "verceldb",
+        "PG_USER": "default",
+        "PG_PASSWORD": "PZceg7UF1MpN",
+        "PG_ENDPOINT": "endpoint=ep-ancient-hat-81967113-pooler",
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "https://yourproductionurl.com",
- 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
