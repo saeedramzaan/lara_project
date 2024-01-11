@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Question;
 
 class ModuleController extends Controller
 {
@@ -12,7 +13,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $data = DB::table('questions')->get();
+        $data = Question::get();
 
       //  return  response()->json($users);
         return json_encode(array('data' => $data,'count' => 3));
