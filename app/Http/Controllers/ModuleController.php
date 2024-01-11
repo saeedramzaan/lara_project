@@ -23,7 +23,10 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return "test";
+        $data = DB::table('questions')->get();
+
+      //  return  response()->json($users);
+        return json_encode(array('data' => $data,'count' => 4));
     }
 
     /**
