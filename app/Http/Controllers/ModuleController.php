@@ -23,7 +23,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        //
+        return "test";
     }
 
     /**
