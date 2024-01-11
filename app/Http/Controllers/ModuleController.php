@@ -24,7 +24,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        $data = Question::get();
+        $data = Que::get();
 
       //  return  response()->json($users);
         return json_encode(array('data' => $data,'count' => 4));
