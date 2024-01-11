@@ -77,7 +77,10 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => 'require',
+            'options' => [
+                'host' => env('DB_ENDPOINT','endpoint=ep-ancient-hat-81967113-pooler'), // Replace with your actual endpoint
+            ],
             
         ],
 
