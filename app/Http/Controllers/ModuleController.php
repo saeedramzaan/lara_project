@@ -52,15 +52,16 @@ $endpoint = "ep-ancient-hat-81967113-pooler";
 
 // $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . "' sslmode=require";
 
- $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+//  $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
 
 
-$dbconn = pg_connect($connection_string);
+// $dbconn = pg_connect($connection_string);
 
-if (!$dbconn) {
-    die("Connection failed: " . pg_last_error());
-}
-echo "Connected successfully";
+// if (!$dbconn) {
+//     die("Connection failed: " . pg_last_error());
+// }
+// echo "Connected successfully";
+
     }
 
     /**
