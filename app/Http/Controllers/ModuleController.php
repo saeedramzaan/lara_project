@@ -49,7 +49,10 @@ $user = "default";
 $password = "PZceg7UF1MpN";
 $endpoint = "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com";
 
-$connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+$connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . "' sslmode=require";
+
+// $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+
 
 $dbconn = pg_connect($connection_string);
 
