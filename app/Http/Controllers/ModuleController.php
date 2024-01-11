@@ -24,11 +24,11 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        // try {
-        //     DB::connection()->getPdo();
-        // } catch (\Exception $e) {
-        //     die("Could not connect to the database.  Please check your configuration. error:" . $e );
-        // }
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            die("Could not connect to the database.  Please check your configuration. error:" . $e );
+        }
 
        //  $data = Question::get();
        //  $data = DB::table('questions')->get();
