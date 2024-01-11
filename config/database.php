@@ -79,7 +79,7 @@ return [
             'search_path' => 'public',
             'sslmode' => 'require',
             'options' => [
-                'host' => env('DB_ENDPOINT','endpoint=ep-ancient-hat-81967113-pooler'), // Replace with your actual endpoint
+                'host' => 'endpoint=ep-ancient-hat-81967113-pooler', // Replace with your actual endpoint
             ],
             
         ],
