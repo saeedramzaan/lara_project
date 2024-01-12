@@ -8,7 +8,7 @@ use App\Http\Controllers\ModuleController;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+|  Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -18,6 +18,10 @@ use App\Http\Controllers\ModuleController;
 */
 
 Route::get('/module', [ModuleController::class, 'index']);
+
+Route::get('/url/user', function () {
+     return 'test dataa';
+})->name('api-mobile.user');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
