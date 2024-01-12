@@ -13,10 +13,12 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $data = Question::get();
 
-      //  return  response()->json($users);
-        return json_encode(array('data' => $data,'count' => 3));
+        phpinfo();
+    //     $data = Question::get();
+
+    //   //  return  response()->json($users);
+    //     return json_encode(array('data' => $data,'count' => 3));
     }
 
     /**
@@ -26,11 +28,11 @@ class ModuleController extends Controller
     {
         try {
 
-            $data = Question::get();
-          //  DB::connection()->getPdo();
-           // $data = DB::table('questions')->get();
+        //    $data = Question::get();
+           // DB::connection()->getPdo();
+            $data = DB::table('questions')->get();
 
-           // return $data;
+            return $data;
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }

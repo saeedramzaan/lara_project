@@ -63,40 +63,20 @@ return [
             ]) : [],
         ],
 
-        
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' =>  env('DATABASE_URL'),
-            'host' => 'ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com',
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'verceldb'),
-            'username' => env('DB_USERNAME', 'default'),
-            'password' => env('DB_PASSWORD', 'PZceg7UF1MpN@ep-ancient-hat-81967113-pooler'),
+            'host' => env('DB_HOST', ''),
+            'port' => env('DB_PORT', ''),
+            'database' => env('DB_DATABASE', ''),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'require',
-            'options' => [
-                'host' => 'endpoint=ep-ancient-hat-81967113-pooler', // Replace with your actual endpoint
-            ],
-            
         ],
-
-
-        // 'main' => [
-        //     'driver'    => 'pgsql',
-        //     'host'      =>  'ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com',
-        //     'database'  =>  'verceldb',
-        //     'username'  => 'default',
-        //     'password'  => 'PZceg7UF1MpN',
-        //     'charset'   => 'utf8',
-        //     'collation' => 'utf8_unicode_ci',
-        //     'prefix'    => '',
-        //     'strict'    => false,
-        // ],
-
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
