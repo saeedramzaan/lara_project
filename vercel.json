@@ -6,7 +6,7 @@
     },
     "routes": [{
         "src": "/(.*)",
-        "dest": "/vercel_api/index.php"
+        "dest": "/api/index.php"
     }],
     "env": {
         "PG_HOST": "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com",
