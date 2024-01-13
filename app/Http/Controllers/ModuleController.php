@@ -32,7 +32,7 @@ class ModuleController extends Controller
            // DB::connection()->getPdo();
             $data = DB::table('questions')->get();
 
-            return $data;
+            return json_encode(array('data' => $data,'count' => 3));
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }

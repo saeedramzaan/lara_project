@@ -19,6 +19,8 @@ use App\Http\Controllers\ModuleController;
 
 Route::get('/module', [ModuleController::class, 'index']);
 
+Route::get('/quiz', [ModuleController::class, 'create']);
+
 Route::get('/url/user', function () {
      return 'test dataa';
 })->name('api-mobile.user');
