@@ -21,8 +21,10 @@ Route::get('/module', [ModuleController::class, 'index']);
 
 Route::get('/quiz', [ModuleController::class, 'create']);
 
+Route::post('/ans', [ModuleController::class, 'answer']);
+
 Route::get('/url/user', function () {
-     return 'test dataa';
+     return 'test data';
 })->name('api-mobile.user');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -13,12 +13,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-
         phpinfo();
-    //     $data = Question::get();
-
-    //   //  return  response()->json($users);
-    //     return json_encode(array('data' => $data,'count' => 3));
     }
 
     /**
@@ -28,50 +23,29 @@ class ModuleController extends Controller
     {
         try {
 
-        //    $data = Question::get();
-           // DB::connection()->getPdo();
-            $data = DB::table('questions')->get();
+            $data = Question::select('q_id','answer')->get();
 
-            return json_encode(array('data' => $data,'count' => 3));
+            $count = Question::count();
+
+            return json_encode(array('data' => $data,'count' => $count));
+
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }
 
-       //  $data = Question::get();
-       //  $data = DB::table('questions')->get();
+    }
 
-    //   //  return  response()->json($users);
-    //     return json_encode(array('data' => $data,'count' => 4));
+    public function answer(Request $request){
 
+        try {
 
-// $host = $_ENV['PG_HOST'];
-// $port = $_ENV['PG_PORT'];
-// $db = $_ENV['PG_DB'];
-// $user = $_ENV['PG_USER'];
-// $password = $_ENV['PG_PASSWORD'];
-// $endpoint = $_ENV['PG_ENDPOINT'];
-
-$host = "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com";
-$port = "5432";
-$db = "verceldb";
-$user = "default";
-$password = "PZceg7UF1MpN";
-$endpoint = "ep-ancient-hat-81967113-pooler";
-
-// $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . "' sslmode=require";
-
+            $answer = DB::table('questions')->where('q_id', $request->id)->first();
  
-  $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+            return $answer->correct_answer;
 
-  echo $connection_string;
-
-// $dbconn = pg_connect($connection_string);
-
-// if (!$dbconn) {
-//     die("Connection failed: " . pg_last_error());
-// }
-// echo "Connected successfully";
-
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
     }
 
     /**
