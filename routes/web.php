@@ -14,7 +14,7 @@ use App\Http\Controllers\ModuleController;
 |
 */
 
-Route::get('/create', [ModuleController::class, 'create']);
+Route::post('/create', [ModuleController::class, 'create']);
 
 Route::post('/ans', [ModuleController::class, 'answer']);
 

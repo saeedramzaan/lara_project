@@ -17,11 +17,15 @@ use App\Http\Controllers\ModuleController;
 |
 */
 
+Route::post('/create', [ModuleController::class, 'create']);
+
 Route::get('/module', [ModuleController::class, 'index']);
 
 Route::get('/quiz', [ModuleController::class, 'create']);
 
 Route::post('/ans', [ModuleController::class, 'answer']);
+
+Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
 Route::get('/url/user', function () {
      return 'test data';

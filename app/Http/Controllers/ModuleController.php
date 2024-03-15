@@ -19,34 +19,54 @@ class ModuleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         try {
 
-            $data = Question::select('q_id','answer')->get();
+           $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . '%')->orderBy('q_id','asc')->get();
 
-            $count = Question::count();
+            $count = Question::where('verse_no','LIKE', $request->id.'%')->count();
 
             return json_encode(array('data' => $data,'count' => $count));
 
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
         }
-
     }
 
     public function answer(Request $request){
 
         try {
 
-            $answer = DB::table('questions')->where('q_id', $request->id)->first();
- 
+            $answer = Question::select('correct_answer')->where('verse_no',$request->id)->orderBy('q_id','asc')->first();
+
             return $answer->correct_answer;
 
         } catch (\Exception $e){
            die("Error" + $e);
         }
     }
+
+    public function verses(Request $request){
+
+        try {
+
+        $surah_no = Question::select('verse_no')->where('verse_no','LIKE',"%$request->id%")->orderBy('verse_no','asc')->get();
+
+        $filteredValues = collect($surah_no)->map(function ($value) {
+        $parts = explode(':', $value);
+        return $parts[2];
+        
+        })->unique();
+
+        return $filteredValues->values();
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
