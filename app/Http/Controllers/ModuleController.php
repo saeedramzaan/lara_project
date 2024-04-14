@@ -13,11 +13,29 @@ class ModuleController extends Controller
      */
     public function index()
     {
-      //  phpinfo();
+      
+        //  phpinfo();
 
         $data = Question::where('verse_no','1:1:1')->get();
 
         return $data;
+
+// $host = 'ep-ancient-hat-81967113.us-east-1.aws.neon.tech';
+// $port = '5432';
+// $db = 'verceldb';
+// $user = 'default';
+// $password = 'PZceg7UF1MpN';
+// $endpoint = 'ep-ancient-hat-81967113';
+
+// $connection_string = "host=" . $host . " port=" . $port . " dbname=" . $db . " user=" . $user . " password=" . $password . " options='endpoint=" . $endpoint . "' sslmode=require";
+
+// $dbconn = pg_connect($connection_string);
+
+// if (!$dbconn) {
+//     die("Connection failed: " . pg_last_error());
+// }
+// echo "Connected successfully";
+
     }
 
     /**
