@@ -2,19 +2,19 @@
     "version": 2,
       "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.0" }
+        "api/index.php": { "runtime": "vercel-php@0.6.1" }
     },
     "routes": [{
         "src": "/(.*)",
         "dest": "/api/index.php"
     }],
     "env": {
-        "PG_HOST": "ep-ancient-hat-81967113-pooler.us-east-1.postgres.vercel-storage.com",
+        "PG_HOST": "ep-ancient-hat-81967113.us-east-1.aws.neon.tech",
         "PG_PORT": "5432",
         "PG_DB": "verceldb",
         "PG_USER": "default",
         "PG_PASSWORD": "PZceg7UF1MpN",
-        "PG_ENDPOINT": "endpoint=ep-ancient-hat-81967113-pooler",
+        "PG_ENDPOINT": "endpoint=ep-ancient-hat-81967113",
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "https://yourproductionurl.com",

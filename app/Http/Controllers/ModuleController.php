@@ -14,11 +14,11 @@ class ModuleController extends Controller
     public function index()
     {
       
-        //  phpinfo();
+          phpinfo();
 
-        $data = Question::where('verse_no','1:1:1')->get();
+        // $data = Question::where('verse_no','1:1:1')->get();
 
-        return $data;
+        // return $data;
 
 // $host = 'ep-ancient-hat-81967113.us-east-1.aws.neon.tech';
 // $port = '5432';
