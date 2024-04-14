@@ -14,7 +14,7 @@ class ModuleController extends Controller
     public function index()
     {
       
-          phpinfo();
+       //   phpinfo();
 
          $data = Question::where('verse_no','1:1:1')->get();
 
