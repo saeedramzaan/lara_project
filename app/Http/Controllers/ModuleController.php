@@ -13,7 +13,11 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        phpinfo();
+      //  phpinfo();
+
+      $data = Question::where();
+
+        return "Index Test";
     }
 
     /**
@@ -23,9 +27,9 @@ class ModuleController extends Controller
     {
         try {
 
-           $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . '%')->orderBy('q_id','asc')->get();
+           $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
 
-            $count = Question::where('verse_no','LIKE', $request->id.'%')->count();
+            $count = Question::where('verse_no','LIKE', $request->id.':%')->count();
 
             return json_encode(array('data' => $data,'count' => $count));
 
@@ -36,9 +40,11 @@ class ModuleController extends Controller
 
     public function answer(Request $request){
 
+    
+
         try {
 
-            $answer = Question::select('correct_answer')->where('verse_no',$request->id)->orderBy('q_id','asc')->first();
+            $answer = Question::select('correct_answer')->where('verse_no',$request->id)->orderBy('verse_no','asc')->first();
 
             return $answer->correct_answer;
 
@@ -57,9 +63,10 @@ class ModuleController extends Controller
         $parts = explode(':', $value);
         return $parts[2];
         
-        })->unique();
+        })->unique()->sort();
 
         return $filteredValues->values();
+       // return sort($filteredValues->values());
 
         } catch (\Exception $e){
            die("Error" + $e);

@@ -28,8 +28,10 @@ Route::post('/ans', [ModuleController::class, 'answer']);
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
 Route::get('/url/user', function () {
-     return 'test data';
+    // return 'test data';
+     return redirect()->route('newapi.module');
 })->name('api-mobile.user');
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
