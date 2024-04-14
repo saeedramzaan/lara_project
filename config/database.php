@@ -63,14 +63,20 @@ return [
             ]) : [],
         ],
 
+        // DB_CONNECTION=pgsql
+        // DB_HOST=ep-ancient-hat-81967113.us-east-1.aws.neon.tech
+        // DB_PORT=5432
+        // DB_DATABASE=verceldb
+        // DB_USERNAME=default
+        // DB_PASSWORD=PZceg7UF1MpN
         'pgsql' => [
             'driver' => 'pgsql',
             'url' =>  env('DATABASE_URL'),
-            'host' => env('DB_HOST', ''),
-            'port' => env('DB_PORT', ''),
-            'database' => env('DB_DATABASE', ''),
-            'username' => env('DB_USERNAME', ''),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST','ep-ancient-hat-81967113.us-east-1.aws.neon.tech'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'verceldb'),
+            'username' => env('DB_USERNAME', 'default'),
+            'password' => env('DB_PASSWORD', 'PZceg7UF1MpN'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
