@@ -20,7 +20,7 @@ use App\Http\Controllers\ModuleController;
 Route::post('/create', [ModuleController::class, 'create']);
 
 
-Route::get('/getQuizInfo', [ModuleController::class, 'quizInfo']);
+Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);
 
 Route::get('/module', [ModuleController::class, 'index']);
 
