@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "272f3894-6cf4-4c30-b5c8-d8af3d0c5eab"
+      }
+    },
+    "android": {
+      "package": "com.peace4unity.lara_project"
+    }
+  }
+}

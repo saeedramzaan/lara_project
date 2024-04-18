@@ -41,15 +41,66 @@ class ModuleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
-    {
+
+     public function quizInfo(Request $request)
+     {
+
+
         try {
 
-           $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
+            $separatedAnswers = [];
 
-            $count = Question::where('verse_no','LIKE', $request->id.':%')->count();
+            //   $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
+          
+                $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE','1:1:%')->orderBy('q_id','asc')->get();
+    
+                $count = Question::where('verse_no','LIKE', $request->id.':%')->count();
+    
+            //    return $data; 
+    
+                $dataArray = json_decode($data, true);
+    
+        
+    
+            foreach ($dataArray as $item) {
+            
+            // Remove curly braces from the answer string
+             $cleanedAnswer = str_replace(['{', '}'], '', $item['answer']);
 
-            return json_encode(array('data' => $data,'count' => $count));
+             $question = $item['question'];
+        
+            // Split the answers by commas
+            $answersArray = explode(',', $cleanedAnswer);
+            $answersQues = explode(',', $question);
+            // Store separated answers in a new array
+            $separatedAnswers[] = $answersArray;
+            $separatedQues[] = $answersQues;
+            }
+    
+          //  print_r($separatedAnswers);
+    
+        //  print_r($separatedQues);
+    
+             return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
+    
+            } catch (\Exception $e) {
+                die("Could not connect to the database.  Please check your configuration. error:" . $e );
+            }
+
+    }  
+
+    public function create(Request $request)
+    {
+
+     
+        try {
+
+          $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
+      
+          $count = Question::where('verse_no','LIKE', $request->id.':%')->count();
+
+ 
+          return json_encode(array('data' => $data,'count' => $count));
 
         } catch (\Exception $e) {
             die("Could not connect to the database.  Please check your configuration. error:" . $e );
@@ -69,6 +120,11 @@ class ModuleController extends Controller
         } catch (\Exception $e){
            die("Error" + $e);
         }
+    }
+
+    public function words(Request $request){
+
+        return 'success';
     }
 
     public function verses(Request $request){
