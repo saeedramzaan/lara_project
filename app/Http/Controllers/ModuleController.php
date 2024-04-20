@@ -42,6 +42,52 @@ class ModuleController extends Controller
      * Show the form for creating a new resource.
      */
 
+     public function specQuiz(Request $request)
+     {
+
+
+        try {
+
+            $separatedAnswers = [];
+
+            $new = [];
+
+            //   $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
+          
+                $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE','1:1:1%')->orderBy('q_id','asc')->get();
+    
+                $count = Question::where('verse_no','LIKE', $request->id.':%')->count();
+    
+            //    return $data; 
+    
+                $dataArray = json_decode($data, true);
+    
+        
+    
+            foreach ($dataArray as $item) {
+            
+            // Remove curly braces from the answer string
+             $cleanedAnswer = str_replace(['{', '}'], '', $item['answer']);
+
+             $question = $item['question'];
+        
+            // Split the answers by commas
+            $answersArray = explode(',', $cleanedAnswer);
+            $answersQues = explode(',', $question);
+            // Store separated answers in a new array
+            $separatedAnswers[] = $answersArray;
+            $separatedQues[] = $answersQues;
+            }
+
+            return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
+    
+            } catch (\Exception $e) {
+                die("Could not connect to the database.  Please check your configuration. error:" . $e );
+            }
+
+    }  
+
+
      public function quizInfo(Request $request)
      {
 
@@ -49,6 +95,8 @@ class ModuleController extends Controller
         try {
 
             $separatedAnswers = [];
+
+            $new = [];
 
             //   $data = Question::select('q_id','answer','question')->where('verse_no', 'LIKE', $request->id . ':%')->orderBy('q_id','asc')->get();
           
@@ -76,12 +124,8 @@ class ModuleController extends Controller
             $separatedAnswers[] = $answersArray;
             $separatedQues[] = $answersQues;
             }
-    
-          //  print_r($separatedAnswers);
-    
-        //  print_r($separatedQues);
-    
-             return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
+
+            return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
     
             } catch (\Exception $e) {
                 die("Could not connect to the database.  Please check your configuration. error:" . $e );

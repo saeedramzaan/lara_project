@@ -19,8 +19,9 @@ use App\Http\Controllers\ModuleController;
 
 Route::post('/create', [ModuleController::class, 'create']);
 
-
 Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);
+
+Route::post('/getSpecQuiz', [ModuleController::class, 'specQuiz']);
 
 Route::get('/module', [ModuleController::class, 'index']);
 
