@@ -175,7 +175,7 @@ class ModuleController extends Controller
 
         try {
 
-        $surah_no = Question::select('verse_no')->where('verse_no','LIKE',"%$request->id%")->orderBy('verse_no','asc')->get();
+        $surah_no = Question::select('verse_no')->where('verse_no','LIKE',$request->id.'%')->orderBy('verse_no','asc')->get();
 
         $filteredValues = collect($surah_no)->map(function ($value) {
         $parts = explode(':', $value);
