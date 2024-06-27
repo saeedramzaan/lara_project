@@ -17,6 +17,8 @@ use App\Http\Controllers\ModuleController;
 |
 */
 
+// Route URL Name API has been changed as MAPI 
+
 Route::post('/create', [ModuleController::class, 'create']);
 
 Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);
@@ -32,6 +34,17 @@ Route::post('/ans', [ModuleController::class, 'answer']);
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
 Route::post('/getWords',[ModuleController::class, 'words']);
+
+Route::post('/store', [ModuleController::class, 'store']);
+
+Route::get('/listSurah',[ModuleController::class, 'listSurah']);
+
+Route::post('/listLastVerse',[ModuleController::class, 'listLastVerse']);
+
+Route::post('/search',[ModuleController::class, 'searchWord']);
+
+Route::post('/update',[ModuleController::class,'update']);
+
 
 Route::get('/url/user', function () {
     // return 'test data';

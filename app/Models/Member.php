@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Question extends Model
+class Member extends Model
 {
     use HasFactory;
-    
+    protected $connection = 'second_db';
+    protected $table = 'members';
+
     public $timestamps = false;
-   // protected $connection = 'second_db';
     // protected $primaryKey = null;
     // public $incrementing = false;
 
-    
-
-    protected $table = 'questions'; // Specify your table name
+ //  protected $table = 'questions'; // Specify your table name
 
     protected $primaryKey = 'q_id'; // Specify the primary key column
 
@@ -28,11 +26,4 @@ class Question extends Model
     protected $fillable = [
         'question','answer',
     ];
-
-    // protected $casts = [
-    //     'answer' => 'array', // Cast the column as an array
-    // ];
-
-  
-
 }

@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Question extends Model
+class QuestionBk extends Model
 {
     use HasFactory;
     
     public $timestamps = false;
-   // protected $connection = 'second_db';
+    protected $connection = 'second_db';
     // protected $primaryKey = null;
     // public $incrementing = false;
-
-    
 
     protected $table = 'questions'; // Specify your table name
 
@@ -26,12 +24,10 @@ class Question extends Model
     protected $keyType = 'int'; // Ensure key type is integer
 
     protected $fillable = [
-        'question','answer',
+        'question','verse_no', 'answer', 'updated_date', 'correct_answer'
     ];
 
-    // protected $casts = [
-    //     'answer' => 'array', // Cast the column as an array
-    // ];
+ 
 
   
 

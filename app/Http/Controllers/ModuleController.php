@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+// use App\Models\Question;
+use App\Models\Member;
 use App\Models\Question;
+use App\Models\QuestionBk; 
+
+
 
 class ModuleController extends Controller
 {
@@ -16,9 +21,13 @@ class ModuleController extends Controller
       
        //   phpinfo();
 
-         $data = Question::where('verse_no','1:1:1')->get();
+       $data = QuestionBk::get();
 
-         return $data;
+       return $data;
+
+        //  $data = Question::where('verse_no','1:1:1')->get();
+
+        //  return $data;
 
 // $host = 'ep-ancient-hat-81967113.us-east-1.aws.neon.tech';
 // $port = '5432';
@@ -153,8 +162,6 @@ class ModuleController extends Controller
 
     public function answer(Request $request){
 
-    
-
         try {
 
             $answer = Question::select('correct_answer')->where('verse_no',$request->id)->orderBy('verse_no','asc')->first();
@@ -196,10 +203,86 @@ class ModuleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function listSurah(){
+
+        $questionAll = Question::select('verse_no')->where('verse_no','LIKE',$request->id.'%')->orderBy('verse_no','asc')->get(); 
+        return response()->json(['data' => $questionAll]);
+    }
+
+    public function listLastVerse(){
+
+        $maxId = Question::max('q_id');
+
+//echo $maxId;
+
+        // $questionAll = Question::select('q_id','question','verse_no')->where('verse_no','LIKE','89%')->orderBy('verse_no','desc')->first(); 
+        // return response()->json(['data' => $questionAll]);
+
+        $questionAll = Question::select('q_id','question','verse_no','answer','updated_date')->where('q_id',$maxId)->orderBy('verse_no','asc')->get(); 
+        return response()->json(['data' => $questionAll]);
+
+        
+    }
+
+    public function searchWord(Request $request)
+    {
+      //  return $request;
+
+        $data = $request->id;
+
+        $questionAll = Question::select('q_id','question','verse_no','answer','correct_answer')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
+        return response()->json(['data' => $questionAll]);
+
+      //  return $questionAll;
+
+       // $texts = Answer::pluck('text');
+
+    }
+
     public function store(Request $request)
     {
-        //
+       $maxId = Question::max('q_id') + 1;
+
+    if (request('answer1') == null || request('answer2') == null  || request('answer3') == null  || request('answer4') == null ) {
+        
+        return response()->json(['status' => false]);
+    
+        } else {
+       
+        $arrayData = [$request->answer1,$request->answer2,$request->answer3,$request->answer4];
+
+         $qid = $request->qId; 
+         $question =  $request->word;
+         $date = $request->date;
+         $verse_no = $request->verseNo;
+         $correctAnswer = $request->correctAnswer; 
+
+    // Format the array as a string with curly braces
+    $formattedArray = '{' . implode(',', array_map(function($item) {
+        return '"' . $item . '"';
+    }, $arrayData)) . '}';
+
+// Execute the raw SQL query
+    $result = DB::statement('INSERT INTO questions (question,verse_no,answer,updated_date,correct_answer) VALUES (?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer]);
+
+    $question = new QuestionBk();
+    $question->q_id = $maxId; 
+    $question->question = $request->word; 
+    $question->verse_no = $verse_no; 
+    $question->answer = $formattedArray; 
+    $question->updated_date = $date; 
+    $question->correct_answer = $correctAnswer; 
+    $question->save();
+
+        return response()->json(['status' => true]);
     }
+
+    
+
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -220,9 +303,45 @@ class ModuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        // if (request('answer1') == null || request('answer2') == null  || request('answer3') == null  || request('answer4') == null ) {
+        
+        //     return response()->json(['status' => false]);
+        
+        //     } else {
+
+          //  return $request;
+
+            $qId = $request->qId; 
+
+           // return $qId;
+           
+            $arrayData = [$request->answer1,$request->answer2,$request->answer3,$request->answer4];
+    
+             $question =  $request->question;
+            // $date = $request->date;
+             $verseNo = $request->verseNo; 
+             $correctAnswer = $request->correctAnswer; 
+    
+        // Format the array as a string with curly braces
+        $formattedArray = '{' . implode(',', array_map(function($item) {
+            return '"' . $item . '"';
+        }, $arrayData)) . '}';
+    
+    // Execute the raw SQL query
+            $result = DB::update('UPDATE questions SET question = ?, verse_no = ?, answer = ?,correct_answer = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$qId]);
+            
+            $result = QuestionBk::where('q_id', $qId)
+            ->update([
+            'question' => $request->question,
+            'verse_no' => $verseNo,
+            'answer' => $formattedArray,
+            'correct_answer' => $correctAnswer,
+            ]);
+            
+            return response()->json(['status' => true]);
+        // }
     }
 
     /**
