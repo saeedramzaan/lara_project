@@ -219,7 +219,7 @@ class ModuleController extends Controller
         // $questionAll = Question::select('q_id','question','verse_no')->where('verse_no','LIKE','89%')->orderBy('verse_no','desc')->first(); 
         // return response()->json(['data' => $questionAll]);
 
-        $questionAll = Question::select('q_id','question','verse_no','answer','updated_date')->where('q_id',$maxId)->orderBy('verse_no','asc')->get(); 
+        $questionAll = Question::select('q_id','question','verse_no','answer','updated_date','correct_answer')->where('q_id',$maxId)->orderBy('verse_no','asc')->get(); 
         return response()->json(['data' => $questionAll]);
 
         
