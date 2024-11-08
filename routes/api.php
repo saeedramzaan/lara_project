@@ -21,6 +21,8 @@ use App\Http\Controllers\ModuleController;
 
 Route::post('/create', [ModuleController::class, 'create']);
 
+Route::post('/renderQuestion', [ModuleController::class, 'renderQuestion']);
+
 Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);
 
 Route::post('/getSpecQuiz', [ModuleController::class, 'specQuiz']);
@@ -31,19 +33,31 @@ Route::get('/quiz', [ModuleController::class, 'create']);
 
 Route::post('/ans', [ModuleController::class, 'answer']);
 
+Route::post('/verbAns', [ModuleController::class, 'verbAnswer']);
+
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
+
+Route::post('/loadVerb', [ModuleController::class, 'loadVerbs']);
 
 Route::post('/getWords',[ModuleController::class, 'words']);
 
 Route::post('/store', [ModuleController::class, 'store']);
 
+Route::post('/storeVerb', [ModuleController::class, 'storeVerb']);
+
 Route::get('/listSurah',[ModuleController::class, 'listSurah']);
 
 Route::post('/listLastVerse',[ModuleController::class, 'listLastVerse']);
 
+Route::post('/listLastVerb',[ModuleController::class, 'listLastVerb']);
+
 Route::post('/search',[ModuleController::class, 'searchWord']);
 
+Route::post('/searchVerb',[ModuleController::class, 'searchVerb']);
+
 Route::post('/update',[ModuleController::class,'update']);
+
+Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
 
 
 Route::get('/url/user', function () {
