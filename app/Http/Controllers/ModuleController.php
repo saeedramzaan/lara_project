@@ -374,7 +374,7 @@ class ModuleController extends Controller
     $question->save();
 
 
-    $question = new VerbBk();
+    $question = new VerbBk(); //
     $question->q_id = $maxId; 
     $question->question = $request->word; 
     $question->verse_no = $verse_no; 
