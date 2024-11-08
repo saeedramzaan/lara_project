@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Verb extends Model
 {
+    //Cloud verceldb database 
     use HasFactory;
     
     public $timestamps = false;

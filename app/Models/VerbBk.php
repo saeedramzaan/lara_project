@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VerbBk extends Model
 {
+      // Local Postgres Database 
     use HasFactory;
     
     public $timestamps = false;

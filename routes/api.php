@@ -21,7 +21,7 @@ use App\Http\Controllers\ModuleController;
 
 Route::post('/create', [ModuleController::class, 'create']);
 
-Route::post('/renderQuestion', [ModuleController::class, 'renderQuestion']);
+Route::post('/renderQuestion', [ModuleController::class, 'renderQuestion']); // verbTable
 
 Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);
 
