@@ -37,6 +37,14 @@ Route::post('/verbAns', [ModuleController::class, 'verbAnswer']);
 
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
+Route::post('/verseList', [ModuleController::class, 'verseList']);
+
+Route::post('/chapterList', [ModuleController::class,'chapterList']);
+
+Route::post('/listQuizNo', [ModuleController::class, 'listQuizNo']);
+
+Route::post('/verbDropdown', [ModuleController::class, 'verbDropdown']);
+
 Route::post('/loadVerb', [ModuleController::class, 'loadVerbs']);
 
 Route::post('/getWords',[ModuleController::class, 'words']);
@@ -45,7 +53,7 @@ Route::post('/store', [ModuleController::class, 'store']);
 
 Route::post('/storeVerb', [ModuleController::class, 'storeVerb']);
 
-Route::get('/listSurah',[ModuleController::class, 'listSurah']);
+Route::post('/listSurah',[ModuleController::class, 'listSurah']);
 
 Route::post('/listLastVerse',[ModuleController::class, 'listLastVerse']);
 
@@ -56,6 +64,8 @@ Route::post('/search',[ModuleController::class, 'searchWord']);
 Route::post('/searchVerb',[ModuleController::class, 'searchVerb']);
 
 Route::post('/update',[ModuleController::class,'update']);
+
+// Route::get('/updateVerb',[ModuleController::class,'updateVerb']);
 
 Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
 

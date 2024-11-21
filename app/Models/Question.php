@@ -26,7 +26,7 @@ class Question extends Model
     protected $keyType = 'int'; // Ensure key type is integer
 
     protected $fillable = [
-        'question','answer',
+        'question','answer','category'
     ];
 
     // protected $casts = [

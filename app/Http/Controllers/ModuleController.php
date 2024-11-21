@@ -75,7 +75,6 @@ class ModuleController extends Controller
                 $dataArray = json_decode($data, true);
     
         
-    
             foreach ($dataArray as $item) {
             
             // Remove curly braces from the answer string
@@ -89,6 +88,7 @@ class ModuleController extends Controller
             // Store separated answers in a new array
             $separatedAnswers[] = $answersArray;
             $separatedQues[] = $answersQues;
+
             }
 
             return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
@@ -135,6 +135,7 @@ class ModuleController extends Controller
             // Store separated answers in a new array
             $separatedAnswers[] = $answersArray;
             $separatedQues[] = $answersQues;
+
             }
 
             return json_encode(array('data' => $data, 'questions'=>$separatedQues, 'answers'=>$separatedAnswers,'count' => $count));
@@ -245,7 +246,167 @@ class ModuleController extends Controller
         })->unique()->sort();
 
         return $filteredValues->values();
+
+
+
        // return sort($filteredValues->values());
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+    }
+
+
+    public function listQuizNo(Request $request){
+
+        try {
+
+
+        $verb_names = Verb::select('question')->where('verb_no', 'like', '%:1:1')
+        ->orderBy('verb_no', 'asc')
+        ->pluck('question'); // pluck function transform object into array format
+
+        $quiz_tense = Verb::orderBy('title', 'desc')->distinct()->pluck('title');
+
+        $title = Verb::select('verb_no', 'question')
+        ->orderBy('verb_no', 'asc')->first()->question;
+
+        $quiz_no = Verb::orderBy('verb_no', 'desc')->distinct()->pluck('verb_no');
+
+        //pluck function provide answer in array format rather than object format
+        
+  
+        $filteredValues = collect($quiz_no)->map(function ($value) {
+        $parts = explode(':', $value);
+
+        $cleanedValue = str_replace(['\"', '"', '\\'], '', $parts[0]);
+
+        return $cleanedValue;
+        
+        })->unique()->sort();
+
+
+
+    return json_encode(['verb_id' => $filteredValues->values(), 'tense' => $quiz_tense, 'title' => $verb_names, ]);
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+    }
+
+    
+    public function verbDropdown(Request $request){
+
+    $chapter_data =   Verb::select('category', 'verb_no')
+    ->where('category', 'like', "%verb%")
+    ->orderBy('verb_no','asc')
+    ->get() // Get the collection
+    ->toArray(); // Convert it to an array
+
+
+    $response_no = ['no' => array_map(function ($item) {
+        return explode(':', $item)[0]; // Split by ':' and take the first part
+    }, array_column($chapter_data, 'verb_no'))
+    ];
+
+
+    // Transform the data to the desired structure
+    $response_cat = ['cat' => array_column($chapter_data, 'category'), // Extract 'category'
+    ];
+
+    $validated_cat = array_map(function ($remove_surah) {
+    // Split the string by dashes
+    $parts = explode('-', $remove_surah);
+
+    // Join only the second and third parts if they exist, ignoring anything after the third dash
+    return isset($parts[1]) ? $parts[1] . (isset($parts[2]) ? '-' . $parts[2] : '') : '';
+    
+    }, $response_cat['cat']);
+
+
+
+              return json_encode(['chapter' =>  $response_no['no'], 'title' =>  $validated_cat, ]);
+
+
+
+
+    }
+
+
+    public function verseList(Request $request){
+
+          $chapter_data = Question::select('category', 'verse_no')
+    ->where('category', 'like', "%verse%")
+    ->get() // Get the collection
+    ->toArray(); // Convert it to an array
+
+
+    $response_no = ['no' => array_map(function ($item) {
+        return explode(':', $item)[0]; // Split by ':' and take the first part
+    }, array_column($chapter_data, 'verse_no'))
+    ];
+
+
+    // Transform the data to the desired structure
+    $response_cat = ['cat' => array_column($chapter_data, 'category'), // Extract 'category'
+    ];
+
+    $validated_cat = array_map(function ($remove_surah) {
+    // Split the string by dashes
+    $parts = explode('-', $remove_surah);
+
+    // Join only the second and third parts if they exist, ignoring anything after the third dash
+    return isset($parts[1]) ? $parts[1] . (isset($parts[2]) ? '-' . $parts[2] : '') : '';
+    
+    }, $response_cat['cat']);
+
+        try {
+
+              return json_encode(['chapter' =>  $response_no['no'], 'title' =>  $validated_cat, ]);
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+
+
+    }
+
+     public function chapterList(Request $request){
+
+
+    $chapter_data = Question::select('category', 'verse_no')
+    ->where('category', 'like', "%surah%")
+    ->get() // Get the collection
+    ->toArray(); // Convert it to an array
+
+
+    $response_no = ['no' => array_map(function ($item) {
+        return explode(':', $item)[0]; // Split by ':' and take the first part
+    }, array_column($chapter_data, 'verse_no'))
+    ];
+
+
+    // Transform the data to the desired structure
+    $response_cat = ['cat' => array_column($chapter_data, 'category'), // Extract 'category'
+    ];
+
+    $validated_cat = array_map(function ($remove_surah) {
+    // Split the string by dashes
+    $parts = explode('-', $remove_surah);
+
+    // Join only the second and third parts if they exist, ignoring anything after the third dash
+    return isset($parts[1]) ? $parts[1] . (isset($parts[2]) ? '-' . $parts[2] : '') : '';
+    
+    }, $response_cat['cat']);
+
+
+ 
+
+        try {
+
+     
+              return json_encode(['chapter' =>  $response_no['no'], 'title' =>  $validated_cat, ]);
+
 
         } catch (\Exception $e){
            die("Error" + $e);
@@ -257,18 +418,9 @@ class ModuleController extends Controller
         try {
 
 
-     $surah_no = Verb::select('verb_no')->where('verb_no','LIKE',$request->id.'%')->orderBy('verb_no','asc')->get();
+        $surah_no = Verb::select('verb_no')->where('verb_no','LIKE',$request->id.'%')->orderBy('verb_no','asc')->get();
 
-     
-         // $firstValues = $surah_no->map(function ($item) {
-         //     return (int) explode(":", $item->verb_no)[1]; // Access `verb_no` as a property on the model
-         // });
-
-         // return $firstValues;
-
-      //  return $filteredValues;
-
-                $filteredValues = collect($surah_no)->map(function ($value) {
+        $filteredValues = collect($surah_no)->map(function ($value) {
          $parts = explode(':', $value);
          return $parts[2];
         
@@ -319,11 +471,10 @@ class ModuleController extends Controller
 
     public function searchWord(Request $request)
     {
-      //  return $request;
 
         $data = $request->id;
 
-        $questionAll = Question::select('q_id','question','verse_no','answer','correct_answer')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
+        $questionAll = Question::select('q_id','question','verse_no','answer','correct_answer','category')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
         return response()->json(['data' => $questionAll]);
 
     }
@@ -333,13 +484,17 @@ class ModuleController extends Controller
 
         $data = $request->id;
 
-        $questionAll = Verb::select('q_id','question','verb_no','answer','correct_answer')->where('verb_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
+        $questionAll = Verb::select('q_id','question','verb_no','answer','correct_answer','category')->where('verb_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
         return response()->json(['data' => $questionAll]);
 
     }
 
     public function store(Request $request)
     {
+
+
+  //  return $request; 
+
        $maxId = Question::max('q_id') + 1;
 
     if (request('answer1') == null || request('answer2') == null  || request('answer3') == null  || request('answer4') == null ) {
@@ -355,6 +510,7 @@ class ModuleController extends Controller
          $date = $request->date;
          $verse_no = $request->verseNo;
          $correctAnswer = $request->correctAnswer; 
+         $category = $request->category;
 
     // Format the array as a string with curly braces
     $formattedArray = '{' . implode(',', array_map(function($item) {
@@ -362,25 +518,17 @@ class ModuleController extends Controller
     }, $arrayData)) . '}';
 
 // Execute the raw SQL query
-    $result = DB::statement('INSERT INTO questions (question,verse_no,answer,updated_date,correct_answer) VALUES (?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer]);
+    $result = DB::statement('INSERT INTO questions (question,verse_no,answer,updated_date,correct_answer,category) VALUES (?,?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer,$category]);
 
-    $question = new QuestionBk();
+
+    $question = new QuestionBk(); //
     $question->q_id = $maxId; 
     $question->question = $request->word; 
     $question->verse_no = $verse_no; 
     $question->answer = $formattedArray; 
     $question->updated_date = $date; 
     $question->correct_answer = $correctAnswer; 
-    $question->save();
-
-
-    $question = new VerbBk(); //
-    $question->q_id = $maxId; 
-    $question->question = $request->word; 
-    $question->verse_no = $verse_no; 
-    $question->answer = $formattedArray; 
-    $question->updated_date = $date; 
-    $question->correct_answer = $correctAnswer; 
+    $question->category = $category; 
     $question->save();
 
         return response()->json(['status' => true]);
@@ -391,6 +539,9 @@ class ModuleController extends Controller
     }
 
     public function storeVerb(Request $request){
+
+
+     //  return $request;
 
            $maxId = Question::max('q_id') + 1;
 
@@ -407,6 +558,7 @@ class ModuleController extends Controller
          $date = $request->date;
          $verse_no = $request->verseNo;
          $correctAnswer = $request->correctAnswer; 
+         $category = $request->category;
 
     // Format the array as a string with curly braces
     $formattedArray = '{' . implode(',', array_map(function($item) {
@@ -414,7 +566,7 @@ class ModuleController extends Controller
     }, $arrayData)) . '}';
 
 // Execute the raw SQL query
-    $result = DB::statement('INSERT INTO verbs (question,verb_no,answer,updated_date,correct_answer) VALUES (?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer]);
+    $result = DB::statement('INSERT INTO verbs (question,verb_no,answer,updated_date,correct_answer,category) VALUES (?,?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer,$category]);
 
   
     $question = new VerbBk();
@@ -424,11 +576,12 @@ class ModuleController extends Controller
     $question->answer = $formattedArray; 
     $question->updated_date = $date; 
     $question->correct_answer = $correctAnswer; 
+    $question->category = $category; 
     $question->save();
 
-       return $question; 
+     ///  return $question; 
 
-    //  return  $result; 
+      return  $result; 
 
      //   return response()->json(['status' => true]);
     }
@@ -458,17 +611,10 @@ class ModuleController extends Controller
      */
     public function update(Request $request)
     {
-        // if (request('answer1') == null || request('answer2') == null  || request('answer3') == null  || request('answer4') == null ) {
-        
-        //     return response()->json(['status' => false]);
-        
-        //     } else {
-
+       
           //  return $request;
 
             $qId = $request->qId; 
-
-           // return $qId;
            
             $arrayData = [$request->answer1,$request->answer2,$request->answer3,$request->answer4];
     
@@ -476,6 +622,7 @@ class ModuleController extends Controller
             // $date = $request->date;
              $verseNo = $request->verseNo; 
              $correctAnswer = $request->correctAnswer; 
+             $category = $request->category;
     
         // Format the array as a string with curly braces
         $formattedArray = '{' . implode(',', array_map(function($item) {
@@ -483,7 +630,7 @@ class ModuleController extends Controller
         }, $arrayData)) . '}';
     
     // Execute the raw SQL query
-            $result = DB::update('UPDATE questions SET question = ?, verse_no = ?, answer = ?,correct_answer = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$qId]);
+            $result = DB::update('UPDATE questions SET question = ?, verse_no = ?, answer = ?,correct_answer = ?,category = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$category,$qId]);
             
             $result = QuestionBk::where('q_id', $qId)
             ->update([
@@ -491,15 +638,21 @@ class ModuleController extends Controller
             'verse_no' => $verseNo,
             'answer' => $formattedArray,
             'correct_answer' => $correctAnswer,
+            'category' => $category, 
             ]);
             
             return response()->json(['status' => true]);
-        // }
+       
     }
+
+
 
     public function updateVerb(Request $request)
     {
 
+
+
+      //  return $request;
 
             $qId = $request->qId; 
 
@@ -508,8 +661,9 @@ class ModuleController extends Controller
     
              $question =  $request->question;
       
-             $verseNo = $request->verseNo; 
+             $verbNo = $request->verseNo; 
              $correctAnswer = $request->correctAnswer; 
+             $category = $request->category;
     
         // Format the array as a string with curly braces
         $formattedArray = '{' . implode(',', array_map(function($item) {
@@ -517,14 +671,15 @@ class ModuleController extends Controller
         }, $arrayData)) . '}';
     
             // Execute the raw SQL query
-            $result = DB::update('UPDATE verbs SET question = ?, verb_no = ?, answer = ?,correct_answer = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$qId]);
+            $result = DB::update('UPDATE verbs SET question = ?, verb_no = ?, answer = ?,correct_answer = ?,category = ? WHERE q_id = ?', [$question, $verbNo, $formattedArray,$correctAnswer,$category,$qId]);
             
-            $result = QuestionBk::where('q_id', $qId)
+            $result = VerbBk::where('q_id', $qId)
             ->update([
             'question' => $request->question,
-            'verse_no' => $verseNo,
+            'verb_no' => $verbNo,
             'answer' => $formattedArray,
             'correct_answer' => $correctAnswer,
+            'category' => $category,
             ]);
             
             return response()->json(['status' => true]);
