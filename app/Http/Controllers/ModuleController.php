@@ -54,6 +54,11 @@ class ModuleController extends Controller
      * Show the form for creating a new resource.
      */
 
+     public function TestClass(Request $request){
+
+        return 'TestClass is working';
+     }
+
      public function specQuiz(Request $request)
      {
 
@@ -215,6 +220,8 @@ class ModuleController extends Controller
 
     public function verbAnswer(Request $request){
 
+        return $request; 
+
         try {
 
             $answer = Verb::select('correct_answer')->where('verb_no',$request->id)->orderBy('verb_no','asc')->first();
@@ -374,8 +381,16 @@ class ModuleController extends Controller
      public function chapterList(Request $request){
 
 
+    // $chapter_data = Question::select('category', 'verse_no')
+    // ->where('category', 'like', "%surah%")
+    // ->get() // Get the collection
+    // ->toArray(); // Convert it to an array
+
     $chapter_data = Question::select('category', 'verse_no')
-    ->where('category', 'like', "%surah%")
+    ->where(function ($query) {
+        $query->where('category', 'like', '%surah%')
+              ->orWhere('category', 'like', '%verse%');
+    })
     ->get() // Get the collection
     ->toArray(); // Convert it to an array
 
@@ -521,15 +536,15 @@ class ModuleController extends Controller
     $result = DB::statement('INSERT INTO questions (question,verse_no,answer,updated_date,correct_answer,category) VALUES (?,?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer,$category]);
 
 
-    $question = new QuestionBk(); //
-    $question->q_id = $maxId; 
-    $question->question = $request->word; 
-    $question->verse_no = $verse_no; 
-    $question->answer = $formattedArray; 
-    $question->updated_date = $date; 
-    $question->correct_answer = $correctAnswer; 
-    $question->category = $category; 
-    $question->save();
+    // $question = new QuestionBk(); //
+    // $question->q_id = $maxId; 
+    // $question->question = $request->word; 
+    // $question->verse_no = $verse_no; 
+    // $question->answer = $formattedArray; 
+    // $question->updated_date = $date; 
+    // $question->correct_answer = $correctAnswer; 
+    // $question->category = $category; 
+    // $question->save();
 
         return response()->json(['status' => true]);
     }
@@ -569,15 +584,15 @@ class ModuleController extends Controller
     $result = DB::statement('INSERT INTO verbs (question,verb_no,answer,updated_date,correct_answer,category) VALUES (?,?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer,$category]);
 
   
-    $question = new VerbBk();
-    // $question->q_id = $maxId; 
-    $question->question = $request->word; 
-    $question->verb_no = $verse_no; 
-    $question->answer = $formattedArray; 
-    $question->updated_date = $date; 
-    $question->correct_answer = $correctAnswer; 
-    $question->category = $category; 
-    $question->save();
+    // $question = new VerbBk();
+    // // $question->q_id = $maxId; 
+    // $question->question = $request->word; 
+    // $question->verb_no = $verse_no; 
+    // $question->answer = $formattedArray; 
+    // $question->updated_date = $date; 
+    // $question->correct_answer = $correctAnswer; 
+    // $question->category = $category; 
+    // $question->save();
 
      ///  return $question; 
 
@@ -632,14 +647,14 @@ class ModuleController extends Controller
     // Execute the raw SQL query
             $result = DB::update('UPDATE questions SET question = ?, verse_no = ?, answer = ?,correct_answer = ?,category = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$category,$qId]);
             
-            $result = QuestionBk::where('q_id', $qId)
-            ->update([
-            'question' => $request->question,
-            'verse_no' => $verseNo,
-            'answer' => $formattedArray,
-            'correct_answer' => $correctAnswer,
-            'category' => $category, 
-            ]);
+            // $result = QuestionBk::where('q_id', $qId)
+            // ->update([
+            // 'question' => $request->question,
+            // 'verse_no' => $verseNo,
+            // 'answer' => $formattedArray,
+            // 'correct_answer' => $correctAnswer,
+            // 'category' => $category, 
+            // ]);
             
             return response()->json(['status' => true]);
        

@@ -33,7 +33,7 @@ Route::get('/quiz', [ModuleController::class, 'create']);
 
 Route::post('/ans', [ModuleController::class, 'answer']);
 
-Route::post('/verbAns', [ModuleController::class, 'verbAnswer']);
+Route::get('/verbAns', [ModuleController::class, 'verbAnswer']);
 
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
@@ -68,6 +68,8 @@ Route::post('/update',[ModuleController::class,'update']);
 // Route::get('/updateVerb',[ModuleController::class,'updateVerb']);
 
 Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
+
+Route::get('/testUrl', [ModuleController::class,'testClass']);
 
 
 Route::get('/url/user', function () {
