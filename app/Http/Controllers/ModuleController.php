@@ -688,14 +688,14 @@ class ModuleController extends Controller
             // Execute the raw SQL query
             $result = DB::update('UPDATE verbs SET question = ?, verb_no = ?, answer = ?,correct_answer = ?,category = ? WHERE q_id = ?', [$question, $verbNo, $formattedArray,$correctAnswer,$category,$qId]);
             
-            $result = VerbBk::where('q_id', $qId)
-            ->update([
-            'question' => $request->question,
-            'verb_no' => $verbNo,
-            'answer' => $formattedArray,
-            'correct_answer' => $correctAnswer,
-            'category' => $category,
-            ]);
+            // $result = VerbBk::where('q_id', $qId)
+            // ->update([
+            // 'question' => $request->question,
+            // 'verb_no' => $verbNo,
+            // 'answer' => $formattedArray,
+            // 'correct_answer' => $correctAnswer,
+            // 'category' => $category,
+            // ]);
             
             return response()->json(['status' => true]);
     }
