@@ -23,7 +23,7 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
         'http://localhost:19006',
-        'create-react-app-git-main-saeed-ramzans-projects.vercel.app',
+        'https://create-react-app-nine-rosy-76.vercel.app/',
     ], // Specify your allowed origins
 
     'allowed_origins_patterns' => [],
