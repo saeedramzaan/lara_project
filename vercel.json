@@ -8,6 +8,12 @@
         "src": "/(.*)",
         "dest": "/api/index.php"
     }],
+    "rewrites": [
+        {
+            "source": "/mapi/:path*",
+            "destination": "https://lara-project-mocha.vercel.app/mapi/:path*"
+        }
+    ],
     "env": {
         "PG_HOST": "ep-ancient-hat-81967113.us-east-1.aws.neon.tech",
         "PG_PORT": "5432",
