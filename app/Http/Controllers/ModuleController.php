@@ -490,7 +490,11 @@ class ModuleController extends Controller
         $data = $request->id;
 
         $questionAll = Question::select('q_id','question','verse_no','answer','correct_answer','category')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
-        return response()->json(['data' => $questionAll]);
+       // return response()->json(['data' => $questionAll]);
+
+        return response()->json([
+    'data' => $questionAll,
+], 200, ['Content-Type' => 'application/json']);
 
     }
 
