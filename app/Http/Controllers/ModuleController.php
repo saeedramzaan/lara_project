@@ -484,7 +484,7 @@ class ModuleController extends Controller
         
     }
 
-    public function searchWord(Request $request)
+    public function search(Request $request)
     {
 
         $data = $request->id;
