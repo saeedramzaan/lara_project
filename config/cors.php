@@ -20,16 +20,18 @@ return [
     'allowed_methods' => ['*'],
 
     
-    'allowed_origins' => [
-        'http://localhost:3000',
-        'http://localhost:19006',
-        'https://create-react-app-nine-rosy-76.vercel.app/',
-    ], // Specify your allowed origins
+    // 'allowed_origins' => [
+    //     'http://localhost:3000',
+    //     'http://localhost:19006',
+    //     'https://create-react-app-nine-rosy-76.vercel.app/',
+    // ], // Specify your allowed origins
+
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
-    'allowedHeaders' => ['Content-Type', 'Authorization', 'X-Requested-With'],
+    //'allowedHeaders' => ['Content-Type', 'Authorization', 'X-Requested-With'],
 
     'exposed_headers' => [],
 
