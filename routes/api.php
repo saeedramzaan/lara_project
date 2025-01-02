@@ -41,6 +41,8 @@ Route::post('/verseList', [ModuleController::class, 'verseList']);
 
 Route::post('/chapterList', [ModuleController::class,'chapterList']);
 
+Route::post('/chapterTest', [ModuleController::class,'chapterTest']);
+
 Route::post('/listQuizNo', [ModuleController::class, 'listQuizNo']);
 
 Route::post('/verbDropdown', [ModuleController::class, 'verbDropdown']);

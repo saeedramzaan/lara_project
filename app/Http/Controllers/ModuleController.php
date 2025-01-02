@@ -387,6 +387,7 @@ class ModuleController extends Controller
     // ->toArray(); // Convert it to an array
 
     $chapter_data = Question::select('category', 'verse_no')
+    
     ->where(function ($query) {
         $query->where('category', 'like', '%surah%')
               ->orWhere('category', 'like', '%verse%');
@@ -427,6 +428,57 @@ class ModuleController extends Controller
            die("Error" + $e);
         }
     }
+
+    public function chapterTest(Request $request){
+
+
+        // $chapter_data = Question::select('category', 'verse_no')
+        // ->where('category', 'like', "%surah%")
+        // ->get() // Get the collection
+        // ->toArray(); // Convert it to an array
+    
+        $chapter_data = Question::select('category', 'verse_no')
+        
+        ->where(function ($query) {
+            $query->where('category', 'like', '%surah%')
+                  ->orWhere('category', 'like', '%verse%');
+        })
+        ->get() // Get the collection
+        ->toArray(); // Convert it to an array
+    
+    
+        $response_no = ['no' => array_map(function ($item) {
+            return explode(':', $item)[0]; // Split by ':' and take the first part
+        }, array_column($chapter_data, 'verse_no'))
+        ];
+    
+    
+        // Transform the data to the desired structure
+        $response_cat = ['cat' => array_column($chapter_data, 'category'), // Extract 'category'
+        ];
+    
+        $validated_cat = array_map(function ($remove_surah) {
+        // Split the string by dashes
+        $parts = explode('-', $remove_surah);
+    
+        // Join only the second and third parts if they exist, ignoring anything after the third dash
+        return isset($parts[1]) ? $parts[1] . (isset($parts[2]) ? '-' . $parts[2] : '') : '';
+        
+        }, $response_cat['cat']);
+    
+    
+     
+    
+            try {
+    
+         
+                  return json_encode(['chapter' =>  '123', 'title' =>  $validated_cat, ]);
+    
+    
+            } catch (\Exception $e){
+               die("Error" + $e);
+            }
+        }
 
     public function loadVerbs(Request $request){
 
