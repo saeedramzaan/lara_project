@@ -536,25 +536,27 @@ class ModuleController extends Controller
         
     }
 
-    public function search(Request $request)
+    public function searchWord(Request $request)
     {
 
         $data = $request->id;
 
         $questionAll = Question::select('q_id','question','verse_no','answer','correct_answer','category')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
-       // return response()->json(['data' => $questionAll]);
-      /// return json_encode(['data' => $questionAll]);
+        return response()->json(['data' => $questionAll]);
+      
+      
+       /// return json_encode(['data' => $questionAll]);
 //         return response()->json([
 //     'data' => $questionAll,
 // ], 200, ['Content-Type' => 'application/json']);
 
-return response()->json([
-    'data' => $questionAll,
-], 200, [
-    'Access-Control-Allow-Origin' => 'https://create-react-app-nine-rosy-76.vercel.app',
-    'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-    'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
-]);
+// return response()->json([
+//     'data' => $questionAll,
+// ], 200, [
+//     'Access-Control-Allow-Origin' => 'https://create-react-app-nine-rosy-76.vercel.app',
+//     'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+//     'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
+// ]);
 
     }
 
