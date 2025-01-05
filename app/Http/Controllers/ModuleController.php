@@ -56,7 +56,7 @@ class ModuleController extends Controller
 
      public function TestClass(Request $request){
 
-        return 'TestClass is working Fine';
+        return 'TestClass is working Finee';
      }
 
      public function specQuiz(Request $request)
