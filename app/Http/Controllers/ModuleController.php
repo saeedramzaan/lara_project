@@ -220,7 +220,7 @@ class ModuleController extends Controller
 
     public function verbAnswer(Request $request){
 
-        return $request; 
+     //   return $request; 
 
         try {
 
