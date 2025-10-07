@@ -269,9 +269,18 @@ class ModuleController extends Controller
         try {
 
 
-        $verb_names = Verb::select('question')->where('verb_no', 'like', '%:1:1')
-        ->orderBy('verb_no', 'asc')
-        ->pluck('question'); // pluck function transform object into array format
+        // $verb_names = Verb::select('question')->where('verb_no', 'like', '%:1:1')
+        // ->orderBy('verb_no', 'asc')
+        // ->pluck('question'); // pluck function transform object into array format
+
+
+       $verb_names = Verb::where('verb_no', 'like', '%:1:1')
+       ->orderByRaw('CAST(split_part(verb_no, \':\', 1) AS INTEGER) ASC') // This Query is specially for Postgres DB, not for Mysql. For mysql - should use SUBSTRING_INDEX(verb_no, ":", 1)
+       ->pluck('question')
+       ->toArray();
+
+        return $verb_names;
+
 
         $quiz_tense = Verb::orderBy('title', 'desc')->distinct()->pluck('title');
 
@@ -291,7 +300,6 @@ class ModuleController extends Controller
         return $cleanedValue;
         
         })->unique()->sort();
-
 
 
     return json_encode(['verb_id' => $filteredValues->values(), 'tense' => $quiz_tense, 'title' => $verb_names, ]);
