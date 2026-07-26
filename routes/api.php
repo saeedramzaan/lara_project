@@ -20,7 +20,7 @@ use App\Http\Controllers\ModuleController;
 // Route URL Name API has been changed as MAPI 
 
 Route::post('/create', [ModuleController::class, 'create']);
-
+Route::get('/testurl',[ModuleController::class, 'testurl]);
 Route::post('/renderQuestion', [ModuleController::class, 'renderQuestion']); // verbTable
 
 Route::post('/getQuizInfo', [ModuleController::class, 'quizInfo']);

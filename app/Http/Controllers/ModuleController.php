@@ -19,6 +19,9 @@ class ModuleController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    
+
     public function index()
     {
       
@@ -58,6 +61,11 @@ class ModuleController extends Controller
 
         return 'TestClass is working Finee';
      }
+
+     public function testurl(){
+        return 'testurl';
+     }
+
 
      public function specQuiz(Request $request)
      {
