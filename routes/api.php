@@ -75,7 +75,7 @@ Route::post('/update',[ModuleController::class,'update']);
 
 Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
 
-Route::get('/testurl', [ModuleController::class,'testClass']);
+Route::get('/testUrl', [ModuleController::class,'testClass']);
 
 
 Route::get('/url/user', function () {
