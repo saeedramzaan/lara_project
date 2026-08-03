@@ -631,6 +631,17 @@ class ModuleController extends Controller
 
     }
 
+
+    public function searchEngWord(Request $request)
+    {
+
+        $data = $request->id;
+
+        $questionAll = Engword::select('q_id','question','verse_no','answer','correct_answer','category')->where('verse_no','LIKE',$request->id.'%')->orderBy('q_id','asc')->get(); 
+        return response()->json(['data' => $questionAll]);
+      
+    }
+
     public function store(Request $request)
     {
 
@@ -767,7 +778,6 @@ class ModuleController extends Controller
       return response()->json(['status' => true]);
     }
     }
-
 
 
     /**
