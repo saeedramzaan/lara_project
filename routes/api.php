@@ -67,6 +67,8 @@ Route::post('/listLastVerse',[ModuleController::class, 'listLastVerse']);
 
 Route::post('/listLastVerb',[ModuleController::class, 'listLastVerb']);
 
+Route::post('/listLastEngWord',[ModuleController::class, 'listLastEnglishWord']);
+
 Route::post('/search',[ModuleController::class, 'searchWord']);
 
 Route::post('/searchVerb',[ModuleController::class, 'searchVerb']);
