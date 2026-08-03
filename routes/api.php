@@ -59,6 +59,8 @@ Route::post('/store', [ModuleController::class, 'store']);
 
 Route::post('/storeVerb', [ModuleController::class, 'storeVerb']);
 
+Route::post('/engStore', [ModuleController::class, 'englishStore']);
+
 Route::post('/listSurah',[ModuleController::class, 'listSurah']);
 
 Route::post('/listLastVerse',[ModuleController::class, 'listLastVerse']);
