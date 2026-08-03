@@ -835,6 +835,31 @@ class ModuleController extends Controller
        
     }
 
+    public function englishUpdate(Request $request)
+    {
+       
+
+            $qId = $request->qId; 
+           
+            $arrayData = [$request->answer1,$request->answer2,$request->answer3,$request->answer4];
+    
+             $question =  $request->question;
+             $verseNo = $request->verseNo; 
+             $correctAnswer = $request->correctAnswer; 
+             $category = $request->category;
+    
+        // Format the array as a string with curly braces
+        $formattedArray = '{' . implode(',', array_map(function($item) {
+            return '"' . $item . '"';
+        }, $arrayData)) . '}';
+    
+    // Execute the raw SQL query
+            $result = DB::update('UPDATE engwords SET question = ?, verse_no = ?, answer = ?,correct_answer = ?,category = ? WHERE q_id = ?', [$question, $verseNo, $formattedArray,$correctAnswer,$category,$qId]);
+            
+            return response()->json(['status' => true]);
+       
+    }
+
 
 
     public function updateVerb(Request $request)
