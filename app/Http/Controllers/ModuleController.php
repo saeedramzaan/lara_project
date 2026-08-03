@@ -10,6 +10,7 @@ use App\Models\Question;
 use App\Models\Verb;
 use App\Models\QuestionBk; 
 use App\Models\VerbBk; 
+use App\Models\Engword;
 
 
 
@@ -103,6 +104,9 @@ class ModuleController extends Controller
             }
 
     }  
+
+
+    
 
 
      public function quizInfo(Request $request)
@@ -627,6 +631,9 @@ class ModuleController extends Controller
 
     }
 
+
+    
+
     public function storeVerb(Request $request){
 
 
@@ -675,6 +682,41 @@ class ModuleController extends Controller
      //   return response()->json(['status' => true]);
     }
 
+    }
+
+    public function englishStore(Request $request)
+    {
+
+
+  //  return $request; 
+
+    $maxId = Engword::max('q_id') + 1;
+
+    if (request('answer1') == null || request('answer2') == null  || request('answer3') == null  || request('answer4') == null ) {
+      
+      return response()->json(['status' => false]);
+  
+      } else {
+     
+      $arrayData = [$request->answer1,$request->answer2,$request->answer3,$request->answer4];
+
+       $qid = $request->qId; 
+       $question =  $request->word;
+       $date = $request->date;
+       $verse_no = $request->verseNo;
+       $correctAnswer = $request->correctAnswer; 
+       $category = $request->category;
+
+    // Format the array as a string with curly braces
+     $formattedArray = '{' . implode(',', array_map(function($item) {
+      return '"' . $item . '"';
+    }, $arrayData)) . '}';
+
+    // Execute the raw SQL query
+    $result = DB::statement('INSERT INTO engwords (question,verse_no,answer,updated_date,correct_answer,category) VALUES (?,?,?,?,?,?)', [$question,$verse_no,$formattedArray,$date,$correctAnswer,$category]);
+
+      return response()->json(['status' => true]);
+    }
     }
 
 
