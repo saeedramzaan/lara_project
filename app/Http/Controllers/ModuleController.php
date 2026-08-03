@@ -106,9 +106,6 @@ class ModuleController extends Controller
     }  
 
 
-    
-
-
      public function quizInfo(Request $request)
      {
 
@@ -158,7 +155,6 @@ class ModuleController extends Controller
     public function create(Request $request)
     {
 
-     
         try {
 
           $data = Question::select('q_id','answer','question')
@@ -530,6 +526,17 @@ class ModuleController extends Controller
 
 
         $questionAll = Question::select('q_id','question','verse_no','answer','updated_date','correct_answer')->where('q_id',$maxId)->orderBy('verse_no','asc')->get(); 
+        
+        return response()->json(['data' => $questionAll]);
+
+        
+    }
+
+    public function listLastEnglishWord(){
+
+        $maxId = Engword::max('q_id');
+
+        $questionAll = Engword::select('q_id','question','verse_no','answer','updated_date','correct_answer')->where('q_id',$maxId)->orderBy('verse_no','asc')->get(); 
         
         return response()->json(['data' => $questionAll]);
 
