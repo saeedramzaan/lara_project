@@ -94,6 +94,18 @@ Route::get('/url/user', function () {
 })->name('api-mobile.user');
 
 
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+   
+    Route::post('/logout', [AuthController::class, 'logout']);
+   
+    Route::get('/user', function (Request $request){
+        return $request->user();
+    });
+    
+   // return $request->user();
 });
+    
