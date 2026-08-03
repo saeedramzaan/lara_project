@@ -79,6 +79,8 @@ Route::post('/searchEng',[ModuleController::class, 'searchEngWord']);
 
 Route::post('/update',[ModuleController::class,'update']);
 
+Route::post('/engUpdate',[ModuleController::class,'englishUpdate']);
+
 // Route::get('/updateVerb',[ModuleController::class,'updateVerb']);
 
 Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
