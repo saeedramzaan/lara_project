@@ -6,48 +6,10 @@ message	"The route mapi/logout could not be found."
 
 Invalid username or token. Password authentication is not supported for Git operations.
 
-{
-  "name": "WordlyIQ",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.19.0",
-    "bootstrap": "^5.3.3",
-    "react": "^18.3.1",
-    "react-bootstrap": "^2.10.2",
-    "react-bootstrap-validation": "^0.1.11",
-    "react-dom": "^18.3.1",
-    "react-modal": "^3.16.1",
-    "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
-    "sweetalert2": "^11.11.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
-}
+pm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'create-vite@9.1.2',
+npm WARN EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+npm WARN EBADENGINE   current: { node: 'v20.10.0', npm: '10.2.5' }
+npm WARN EBADENGINE }
+
+
