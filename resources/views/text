@@ -12,7 +12,11 @@ npm warn EBADENGINE   required: { node: '>=22.12.0 || ^24.0.0' },
 npm warn EBADENGINE   current: { node: 'v20.19.0', npm: '10.8.2' }
 npm warn EBADENGINE }
 
+Failed to resolve import "ProjtectedRoute" from "src/App.jsx". Does the file exist?
+
 Failed to resolve import "react-bootstrap/Navbar" from "src/App.jsx". Does the file exist?
 
+import ProtectedRoute from "./ProjtectedRoute";
 
 
+Uncaught TypeError: import_react.useContext(...) is null
