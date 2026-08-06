@@ -4,44 +4,4 @@ Status code: (null).
 
 message	"The route mapi/logout could not be found."
 
-import { BrowserRouter as Router , Routes, Route, Link, useLocation } from "react-router-dom";
-
-function App() {
-
-  const location = useLocation();
-  const isLoggedIn = localStorage.getItem("token");
-
-  return (<Router>
-    <Navbar bg="primary">
-      <Container>
-        {location.pathname !== "/login" && (
-        <Link to={"/"} className="navbar-brand text-white">
-          login
-        </Link>
-        )}
-
-        {isLoggedIn && (
-        <Link to={"/"} className="navbar-brand text-white">
-          logout
-        </Link>
-        )}
-      </Container>
-    </Navbar>
-
-    <Container className="mt-5">
-      <Row>
-        <Col md={12}>
-          <Routes>
-            <Route exact path='/' element={< Home />} />
-            <Route exact path='/wordList' element={< ListWord />} />
-            <Route exact path='/verbList' element={< VerbList />} />
-            <Route exact path='/create' element={< Create />} />
-            <Route exact path='/createVerb' element={<CreateVerb />} />
-            <Route exact path='/home' element={<Home/>}/>
-            <Route exact path='/login' element={<Login/>}/>
-          </Routes>
-        </Col>
-      </Row>
-    </Container>
-  </Router>);
-}
+Invalid username or token. Password authentication is not supported for Git operations.
