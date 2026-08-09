@@ -115,6 +115,75 @@
         />
       </div>
 
+  const handleRowClick = (qId,question,answer,verseNo,correctAnswer,category) => {
+  
+
+
+        console.log(category);
+
+        console.log(answer);
+
+
+      stringWithoutBraces = answer.slice(1, -1); // Remove curly braces
+      arrayValues = stringWithoutBraces.split(','); 
+       console.log(arrayValues);
+
+        setFormData({
+            qId: qId,
+            question: question,
+            answer1: arrayValues[0].replace(/["']/g, ''),
+            answer2: arrayValues[1].replace(/["']/g, ''),
+            answer3: arrayValues[2].replace(/["']/g, ''),
+            answer4: arrayValues[3].replace(/["']/g, ''),
+            verseNo: verseNo,
+            correctAnswer: correctAnswer,
+            category:category
+          });
+
+    };
+
+ const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Form data submitted:', formData);
+
+
+        //  await axios.post(`http://localhost:8000/mapi/engUpdate`, formData).then(({ data }) => {
+
+        await axios.post(`https://lara-project-mocha.vercel.app/mapi/engUpdate`, formData).then(({ data }) => {
+
+        console.log(data.status);
+        if (data.status == false) {
+          Swal.fire({
+            icon: "error",
+            text: "Error"
+          })
+        } else {
+          Swal.fire({
+            icon: "success",
+            text: "Success"
+          })
+        //  navigate('/create')
+       //  window.location.reload();
+
+       const timer = setTimeout(() => {
+      //  navigate('/')
+        window.location.reload();
+       }, 2000); // Time in milliseconds (5000ms = 5 seconds)
+
+        }
+      }).catch(({ response }) => {
+        console.log(response);
+  
+     //  setValidationError(response);
+  
+        if (response === 422) {
+         // setValidationError(response.data.errors)
+        } else {
+  
+        }
+      })
+    }
+
       <div className="dialog-footer">
 
         <button
