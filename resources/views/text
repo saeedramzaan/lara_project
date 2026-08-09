@@ -229,3 +229,16 @@
             </div>
         </div>
     )
+
+        const [formData, setFormData] = useState({
+        qId:'',
+        name: '',
+        answer1: '',
+        answer2: '',
+        answer3: '',
+        answer4: '',
+        verseNo: '',
+        correctAnswer:'',
+        category:'',
+      });
+
