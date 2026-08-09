@@ -1,0 +1,406 @@
+```jsx
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
+
+function YourComponent() {
+  const dialogRef = useRef(null);
+
+  const openDialog = () => {
+    dialogRef.current?.showModal();
+  };
+
+  const closeDialog = () => {
+    dialogRef.current?.close();
+  };
+
+  return (
+    <div className="container">
+      <div className="row">
+
+        <div className="col-12">
+
+          {/* =========================
+              UPDATE DIALOG
+          ========================== */}
+          <dialog
+            ref={dialogRef}
+            className="update-dialog"
+          >
+            <div className="dialog-header">
+              <h5>Update</h5>
+
+              <button
+                type="button"
+                className="dialog-close"
+                onClick={closeDialog}
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="dialog-body">
+
+              <p>{modalValue}</p>
+
+              <form onSubmit={handleSubmit} className="form-container">
+
+                <Row>
+
+                  {/* Answer 1 */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="answer1"
+                        className="form-label"
+                      >
+                        Answer 1:
+                      </label>
+
+                      <input
+                        type="text"
+                        id="answer1"
+                        name="answer1"
+                        value={formData.answer1}
+                        onChange={handleChange1}
+                        className="form-input form-control"
+                      />
+                    </div>
+                  </Col>
+
+                  {/* Answer 2 */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="answer2"
+                        className="form-label"
+                      >
+                        Answer 2:
+                      </label>
+
+                      <input
+                        type="text"
+                        id="answer2"
+                        name="answer2"
+                        value={formData.answer2}
+                        onChange={handleChange2}
+                        className="form-input form-control"
+                      />
+                    </div>
+                  </Col>
+
+                  {/* Answer 3 */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="answer3"
+                        className="form-label"
+                      >
+                        Answer 3:
+                      </label>
+
+                      <input
+                        type="text"
+                        id="answer3"
+                        name="answer3"
+                        value={formData.answer3}
+                        onChange={handleChange3}
+                        className="form-input form-control"
+                      />
+                    </div>
+                  </Col>
+
+                  {/* Answer 4 */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="answer4"
+                        className="form-label"
+                      >
+                        Answer 4:
+                      </label>
+
+                      <input
+                        type="text"
+                        id="answer4"
+                        name="answer4"
+                        value={formData.answer4}
+                        onChange={handleChange4}
+                        className="form-input form-control"
+                      />
+                    </div>
+                  </Col>
+
+                  {/* Correct Answer */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="correct_answer"
+                        className="form-label"
+                      >
+                        Correct Answer:
+                      </label>
+
+                      <input
+                        type="text"
+                        id="correct_answer"
+                        name="correct_answer"
+                        value={formData.correct_answer}
+                        onChange={handleChange}
+                        className="form-input form-control"
+                      />
+                    </div>
+                  </Col>
+
+                  {/* Category */}
+                  <Col md={6}>
+                    <div className="form-group mb-3">
+                      <label
+                        htmlFor="category"
+                        className="form-label"
+                      >
+                        Category:
+                      </label>
+
+                      <select
+                        id="category"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleChange}
+                        className="form-input form-control"
+                      >
+                        {options.map((option, index) => (
+                          <option
+                            key={index}
+                            value={option.value}
+                          >
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </Col>
+
+                </Row>
+
+                {/* Dialog buttons */}
+                <div className="dialog-footer">
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary me-2"
+                    onClick={closeDialog}
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                  >
+                    Submit
+                  </button>
+
+                </div>
+
+              </form>
+            </div>
+          </dialog>
+
+
+          {/* =========================
+              SEARCH / FILTER / CREATE
+          ========================== */}
+          <div className="row align-items-center mb-3">
+
+            <div className="col-md-4">
+              <select
+                value={selectedOption}
+                onChange={handleChange}
+                className="form-select"
+              >
+                {options.map((option, index) => (
+                  <option
+                    key={index}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-md-4">
+              <input
+                type="text"
+                onChange={getInputValue}
+                placeholder="Search here"
+                className="form-control"
+              />
+            </div>
+
+            <div className="col-md-4">
+              <Link
+                className="btn btn-primary mb-2 float-end"
+                to="/create"
+              >
+                Create Words
+              </Link>
+            </div>
+
+          </div>
+
+
+          {/* =========================
+              TABLE
+          ========================== */}
+          <div className="col-12">
+
+            <div className="card card-body">
+
+              <div className="table-responsive">
+
+                <table className="table table-bordered mb-0 text-center">
+
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Verse No</th>
+                      <th>Answers</th>
+                      <th>Correct Answer</th>
+                      <th>Category</th>
+                      <th>Update</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    {tableInfo.map((row, key) => (
+
+                      <tr
+                        key={key}
+                        onClick={() =>
+                          handleRowClick(
+                            row.q_id,
+                            row.question,
+                            row.answer,
+                            row.verse_no,
+                            row.correct_answer,
+                            row.category
+                          )
+                        }
+                      >
+
+                        <td>{row.q_id}</td>
+
+                        <td>{row.question}</td>
+
+                        <td>{row.verse_no}</td>
+
+                        <td>{row.answer}</td>
+
+                        <td>{row.correct_answer}</td>
+
+                        <td>{row.category}</td>
+
+                        <td>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openDialog();
+                            }}
+                          >
+                            Update
+                          </button>
+                        </td>
+
+                      </tr>
+
+                    ))}
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+export default YourComponent;
+```
+
+### Dialog CSS
+
+Add this to your CSS:
+
+```css
+.update-dialog {
+  width: 700px;
+  max-width: 90%;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.update-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.dialog-header h5 {
+  margin: 0;
+}
+
+.dialog-close {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.dialog-body {
+  padding: 20px;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+}
+```
