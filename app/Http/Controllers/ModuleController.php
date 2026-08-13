@@ -530,6 +530,11 @@ class ModuleController extends Controller
             }
         }
 
+      
+
+
+        
+
     public function loadVerbs(Request $request){
 
         try {

@@ -41,6 +41,10 @@ Route::post('/loadVerses', [ModuleController::class, 'verses']);
 
 Route::post('/verseList', [ModuleController::class, 'verseList']);
 
+Route::post('/alist', [ModuleController::class, 'alphabetList']);
+
+Route::get('/listWordNo', [ModuleController::class, 'listWordNo']);
+
 Route::post('/chapterList', [ModuleController::class,'chapterList']);
 
 Route::post('/chapterTes', [ModuleController::class,'chapterTest']);
@@ -69,7 +73,7 @@ Route::post('/listLastVerb',[ModuleController::class, 'listLastVerb']);
 
 Route::post('/listLastEngWord',[ModuleController::class, 'listLastEnglishWord']);
 
-Route::post('/catList', [ModuleController::class,'categoryList']);
+Route::get('/catList', [ModuleController::class,'categoryList']);
 
 Route::post('/search',[ModuleController::class, 'searchWord']);
 
@@ -86,6 +90,8 @@ Route::post('/engUpdate',[ModuleController::class,'englishUpdate']);
 Route::post('/updateVerb',[ModuleController::class,'updateVerb']);
 
 Route::get('/testurl', [ModuleController::class,'testClass']);
+
+Route::post('/alist', [ModuleController::class, 'alphabetList']);
 
 
 Route::get('/url/user', function () {
