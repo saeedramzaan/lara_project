@@ -57,7 +57,7 @@ Route::post('/verbDropdown', [ModuleController::class, 'verbDropdown']);
 
 Route::post('/loadVerb', [ModuleController::class, 'loadVerbs']);
 
-Route::post('/getWords',[ModuleController::class, 'words']);
+Route::post('/getQA',[ModuleController::class, 'getQA']);
 
 Route::post('/store', [ModuleController::class, 'store']);
 
