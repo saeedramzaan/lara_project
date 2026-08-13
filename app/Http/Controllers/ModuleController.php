@@ -263,6 +263,31 @@ class ModuleController extends Controller
         }
     }
 
+    public function alphabetList(Request $request){
+
+        try {
+
+        $surah_no = Engword::select('verse_no')->where('verse_no','LIKE',$request->id.'%')->orderBy('verse_no','asc')->get();
+
+
+
+        $filteredValues = collect($surah_no)->map(function ($value) {
+        $parts = explode(':', $value);
+        return $parts[2];
+        
+        })->unique()->sort();
+
+        return $filteredValues->values();
+
+
+
+       // return sort($filteredValues->values());
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+    }
+
 
     public function listQuizNo(Request $request){
 
