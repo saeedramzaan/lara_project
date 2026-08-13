@@ -73,7 +73,7 @@ Route::post('/listLastVerb',[ModuleController::class, 'listLastVerb']);
 
 Route::post('/listLastEngWord',[ModuleController::class, 'listLastEnglishWord']);
 
-Route::get('/catList', [ModuleController::class,'categoryList']);
+Route::post('/categoryList', [ModuleController::class,'categoryList']);
 
 Route::post('/search',[ModuleController::class, 'searchWord']);
 
