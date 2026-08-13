@@ -172,6 +172,26 @@ class ModuleController extends Controller
         }
     }
 
+    public function getQA(Request $request)
+    {
+       // $request->id ="1:1";
+
+        try {
+
+          $data = Engword::select('q_id','answer','question')
+          ->where('verse_no', 'LIKE', $request->id . ':%')
+          ->orderBy('q_id','asc')
+          ->get();
+      
+          $count = Engword::where('verse_no','LIKE', $request->id.':%')->count();
+
+          return json_encode(array('data' => $data,'count' => $count));
+
+        } catch (\Exception $e) {
+            die("Could not connect to the database.  Please check your configuration. error:" . $e );
+        }
+    }
+
      public function renderQuestion(Request $request)
     {
 
