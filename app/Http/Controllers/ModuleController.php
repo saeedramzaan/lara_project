@@ -238,6 +238,20 @@ class ModuleController extends Controller
         }
     }
 
+    public function engAnswer(Request $request){
+
+        try {
+
+            $answer = Engword::select('correct_answer')->where('verse_no',$request->id)->orderBy('verse_no','asc')->first();
+
+            return $answer->correct_answer;
+
+        } catch (\Exception $e){
+           die("Error" + $e);
+        }
+    }
+
+
     public function verbAnswer(Request $request){
 
      //   return $request; 
