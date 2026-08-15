@@ -35,6 +35,8 @@ Route::get('/quiz', [ModuleController::class, 'create']);
 
 Route::post('/ans', [ModuleController::class, 'answer']);
 
+Route::post('/engAns', [ModuleController::class, 'engAnswer']);
+
 Route::post('/verbAns', [ModuleController::class, 'verbAnswer']);
 
 Route::post('/loadVerses', [ModuleController::class, 'verses']);
