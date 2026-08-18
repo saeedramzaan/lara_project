@@ -1,244 +1,29 @@
-
- return (
-
-        <div className="container">
-            <div className="row">
-                <div className='col-12'>
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={closeModal}
-                appElement={document.getElementById('root')} // Pass the appElement prop
-            >
-                
-                <p>{modalValue}</p>
-
-             
-
-
-                <form onSubmit={handleSubmit} class="form-container">
-                <h5> Update </h5>
-                  <Row>
-                <Col>
-  <div class="form-group">
-    <label htmlFor="name" class="form-label">Name:</label>
-    <input
-      type="text"
-      id="question"
-      name="question"
-      value={formData.question}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-   </Col>
-   <Col>
-
-   <div class="form-group">
-    <label htmlFor="verseNo" class="form-label">Verse No:</label>
-    <input
-      type="text"
-      id="verseNo"
-      name="verseNo"
-      value={formData.verseNo}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-   
-
-  </Col>
-  </Row>
-  <Row>
-                <Col>
-
-                <div class="form-group">
-    <label htmlFor="answer1" class="form-label">Answer 1:</label>
-    <input
-      type="text"
-      id="answer1"
-      name="answer1"
-      value={formData.answer1}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
- 
-  </Col>
-  <Col>
-
-  <div class="form-group">
-    <label htmlFor="answer2" class="form-label">Answer 2:</label>
-    <input
-      type="text"
-      id="answer2"
-      name="answer2"
-      value={formData.answer2}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-
-</Col>
-</Row>
-
-<Row>
-  <Col>
-
-
-  <div class="form-group">
-    <label htmlFor="answer3" class="form-label">Answer 3:</label>
-    <input
-      type="text"
-      id="answer3"
-      name="answer3"
-      value={formData.answer3}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-
- 
-  </Col>
-
-  <Col>
-  <div class="form-group">
-    <label htmlFor="answer4" class="form-label">Answer 4:</label>
-    <input
-      type="text"
-      id="answer4"
-      name="answer4"
-      value={formData.answer4}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-  </Col>
-
-  </Row>
- <Col>
-  <div class="form-group">
-    <label htmlFor="correctAnswer" class="form-label">Correct Answer</label>
-    <input
-      type="text"
-      id="correctAnswer"
-      name="correctAnswer"
-      value={formData.correctAnswer}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-  </Col>
-
- <Col>
-  <div class="form-group">
-    <label htmlFor="category" class="form-label">Category</label>
-    <input
-      type="text"
-      id="category"
-      name="category"
-      value={formData.category}
-      onChange={handleChange1}
-      class="form-input"
-    />
-  </div>
-  </Col>
-
-  <Row>
-
-  </Row>
-
-  <button type="submit" class="form-submit-button">Submit</button>
-
-</form>
-
-<div className="div-center">
-<button class="close-button" onClick={closeModal}>Close Modal</button>
-</div>
-            
-            </Modal>
-                
-                <div>
-        <select value={selectedOption} onChange={handleChange}>
-        {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
-
-    </div>
-
-                    <Col>
-                        <input type="text" onChange={getInputValue} placeholder="Search here" />
-                    </Col>
-
-                    <Col>
-                        <Link className='btn btn-primary mb-2 float-end' to={"/create"}>
-                            Create Words
-                        </Link>
-                    </Col>
-
-                </div>
-                
-                <div className="col-12">
-                    <div className="card card-body">
-                        <div className="table-responsive">
-                            <table className="table table-bordered mb-0 text-center">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Verse No</th>
-                                        <th>Answers</th>
-                                        <th>Correct Answer</th>
-                                         <th>Category</th> 
-                                        <th>Update</th> 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-
-                                        // patients.length > 0 && (
-
-                                            tableInfo.map((row, key) => (
-
-                                                <tr key={key} onClick={() => handleRowClick(row.q_id,row.question,row.answer,row.verse_no,row.correct_answer,row.category)}>
-                                                    <td >{row.q_id}</td>
-                                                    <td>{row.question}</td>
-                                                    <td>{row.verse_no}</td>
-                                                    <td>{row.answer}</td>
-                                                    <td>{row.correct_answer}</td>
-                                                    <td>{row.category}</td>
-                                                    <td><button onClick={openModal} class="form-input">Update</button></td>
-                                                </tr>
-                                            ))
-                                        // )
-                                    }
-                                </tbody>
-                            </table>
-
-                            <div>
-          
-        </div>
-
-
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-
-        const [formData, setFormData] = useState({
-        qId:'',
-        name: '',
-        answer1: '',
-        answer2: '',
-        answer3: '',
-        answer4: '',
-        verseNo: '',
-        correctAnswer:'',
-        category:'',
-      });
-
+{
+  "cli": {
+    "version": ">= 5.9.3",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development"
+    },
+    "preview": {
+      "android":{
+      "distribution": "internal",
+      "channel": "preview",
+      "buildType": "apk"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "android":{
+        "buildType": "app-bundle"
+        }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
